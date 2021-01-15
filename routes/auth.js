@@ -20,11 +20,17 @@ router.post('/register', async (req, res) => {
     const user = new User({
         // name: req.body.name,
         email: req.body.email,
-        password: hashedPassword
+        password: hashedPassword,
     });
     try {
+        //CREATE AND ASSIGN TOKEN
+        const token = jwt.sign({_id: user.id}, process.env.TOKEN_SECRET)
+        // console.log(user);
         const savedUser = await user.save();
-        res.send({ user: user._id});
+        res.status(200).json({user:savedUser, token: token});
+        console.log('it create user...Auth.js')
+        
+        // res.send({ user: user._id});
     }catch(err){
         res.status(400).send(err)
     }
@@ -32,23 +38,27 @@ router.post('/register', async (req, res) => {
 
 //LOGIN
 router.post('/login', async (req, res) => {
-
+   
     //Check if wrong email
     const foundUser = await User.findOne({ email: req.body.email });
-        if (!foundUser) return res.status(400).send('Email not found');
+    if (!foundUser) return res.status(400).json('Email not found');
+
     //Check if correct password
     const validPass = await bcrypt.compare(req.body.password, foundUser.password);
     if(!validPass) 
-    {
-        const Herror = 'invalid password';
+    {   
+        const myError = 'invalid password';
         //return res.status(400).send('Invalid password');
-        return res.status(400).header('error', Herror).send(Herror);
+        return res.status(400).json(myError);
     };
+    
 
-    //Create and assign token
-    const token = jwt.sign({_id: foundUser._id}, process.env.TOKEN_SECRET)
-    res.header('auth-token', token).send(token); //sending back token
-    //res.send('Logged In!')
+    //CREATE AND ASSIGN TOKEN
+    const token = jwt.sign({_id: foundUser.id}, process.env.TOKEN_SECRET)
+    res.status(200).json({user:foundUser._id, token: token, superUser:foundUser.superUser });
+    // console.log(foundUser.superUser)
+    //res.header('auth-token', token).send(token); //sending back token
+    
 })
 
 

@@ -10,6 +10,10 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userID:{
+        type:String,
+        required:true,
+    },
     issue: {
         type: String,
         required: true,

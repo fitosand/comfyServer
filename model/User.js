@@ -3,9 +3,14 @@ const mongoose = require('mongoose');
 
 //user model
 const userSchema = new mongoose.Schema({
+    superUser:{
+        type:Boolean,
+        required: false,
+        default:false
+    },
     name: {
         type: String,
-        required: true,
+        required: false,
         min: 6,
         max: 255
     },
