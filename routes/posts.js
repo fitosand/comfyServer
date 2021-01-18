@@ -11,7 +11,7 @@ router.get('/', verify,  async (req, res) => {
     // res.send(req.user) //this finds the user
     //Post.findOne({_id: req.user}) //this finds the id to that user
     try{
-        const foundPosts = await Post.find(); //returns all
+        const foundPosts = await Post.find().sort('-date'); //returns all
         res.json(foundPosts);
         //console.log(foundPosts.length)
 
@@ -30,7 +30,7 @@ router.get('/:userID', verify, async (req, res) => {
     //Post.findOne({_id: req.user}) //this finds the id to that user
     //res.send(req.params.userID);
     try{
-        const specificPost = await Post.find({ userID: req.params.userID});
+        const specificPost = await Post.find({ userID: req.params.userID}).sort('-date');
             //res.status(200).json({post:specificPost});
             // res.send.json(specificPost);
             res.status(200).send(specificPost);
