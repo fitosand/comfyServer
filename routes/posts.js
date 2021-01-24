@@ -89,5 +89,4 @@ router.delete('/:postId', verify, async (req,res) => {
     }
 });
 
-
 module.exports = router;
