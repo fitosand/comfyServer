@@ -6,7 +6,8 @@ const cors = require('cors');
 //Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
-const paymentRoute = require('./routes/payment')
+const paymentRoute = require('./routes/payment');
+const calendarRoute = require('./routes/calendar')
 const { populate } = require('./model/User');
 
 dotenv.config();
@@ -22,5 +23,6 @@ app.use(cors());
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/payment', paymentRoute);
+app.use('/api/calendar', calendarRoute);
 
 app.listen(3000, () => console.log('server running!'))

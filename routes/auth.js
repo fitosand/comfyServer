@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
 
     //CREATE AND ASSIGN TOKEN
     const token = jwt.sign({_id: foundUser.id}, process.env.TOKEN_SECRET)
-    res.status(200).json({user:foundUser._id, token: token, superUser:foundUser.superUser });
+    res.status(200).json({user:foundUser._id, token: token, superUser:foundUser.superUser, UnitInfo: foundUser.unit, bInfo: foundUser.building });
     // console.log(foundUser.superUser)
     //res.header('auth-token', token).send(token); //sending back token
     

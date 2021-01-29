@@ -29,6 +29,17 @@ const userSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    }, 
+    building: {
+        type:String,
+        required:true,
+        default: 'Castilla'
+    },
+    unit:{
+        type:String,
+        required:true,
+        default: '1B'
+
     }
     
 });
