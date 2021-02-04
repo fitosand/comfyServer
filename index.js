@@ -8,6 +8,8 @@ const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 const paymentRoute = require('./routes/payment');
 const calendarRoute = require('./routes/calendar')
+const subsRoute = require('./routes/subs')
+
 const { populate } = require('./model/User');
 
 dotenv.config();
@@ -24,5 +26,6 @@ app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/payment', paymentRoute);
 app.use('/api/calendar', calendarRoute);
+app.use('/api/subs', subsRoute);
 
 app.listen(3000, () => console.log('server running!'))
